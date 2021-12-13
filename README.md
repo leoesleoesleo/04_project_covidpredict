@@ -23,7 +23,7 @@ Bootstrap es un marco CSS gratuito y de código abierto dirigido al desarrollo w
 
 - Clonar repositorio
   ```
-  git clone https://github.com/leoesleoesleo/03_project_poke_fastapi.git
+  git clone https://github.com/leoesleoesleo/04_project_covidpredict.git
   ```
 - Crear entorno virtual
 
