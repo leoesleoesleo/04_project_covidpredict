@@ -1,0 +1,308 @@
+
+<center><img src="static/dist/img/banderas/{{data['pais']}}.png"> <h3>{{data['pais']}}</h3></center>
+
+<div class="wrapper">
+  <!-- Navbar -->
+	
+	<!-- Main content -->
+    <section class="content">
+    <div class="container-fluid">
+        
+		<!-- ./card-body -->
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-3 col-6">
+          <div class="description-block border-right">
+            <!--<span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>-->
+            <h5 class="description-header">{{data['casosHoy']}}</h5>
+            <span class="description-text">Casos {{data['fecha']}}</span>
+          </div>
+          <!-- /.description-block -->
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-3 col-6">
+          <div class="description-block border-right">
+            <!--<span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>-->
+            <h5 class="description-header">{{data['casos']}}</h5>
+            <span class="description-text">Total Casos</span>
+          </div>
+          <!-- /.description-block -->
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-3 col-6">
+          <div class="description-block border-right">
+            <!--<span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>-->
+            <h5 style="color: red;" class="description-header">{{data['fallecidosHoy']}}</h5>
+            <span style="color: red;" class="description-text">Muertes {{data['fecha']}}</span>
+          </div>
+          <!-- /.description-block -->
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-3 col-6">
+          <div class="description-block">
+            <!--<span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>-->
+            <h5 style="color: red;" class="description-header">{{data['fallecidos']}}</h5>
+            <span style="color: red;" class="description-text">Total Muertes</span>
+          </div>
+          <!-- /.description-block -->
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-6 col-12">          
+          <div class="alert alert-success" role="alert" style="background-color:#d4edda !important; color:#155724 !important; border-color: #c3e6cb !important;">
+            <h4 class="alert-heading">Diagnostico de Casos</h4>
+            <p>{{data['pais']}} actualmente se encuentra en el Top {{ data['top']['top'].tolist()[0] }} de Casos antes de {{ data['topCasosArriba']['pais'].tolist()[0] }} con {{ data['topCasosArriba']['frecuencia'].tolist()[0] }}  casos  y despues de {{ data['topCasosAbajo']['pais'].tolist()[0] }} con {{ data['topCasosAbajo']['frecuencia'].tolist()[0] }} casos, el dia que más casos ha tenido {{data['pais']}} es {{ data['fechaMaxCasos']['fecha'].tolist()[0] }} con {{ data['fechaMaxCasos']['casos'].tolist()[0] }} casos. </p>
+            <hr>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6 col-12">          
+          <div class="alert alert-danger" role="alert" style="background-color:#f8d7da !important; color:#721c24 !important; border-color: #f5c6cb !important;">
+            <h4 class="alert-heading">Diagnostico de Muertes</h4>
+            <p>{{data['pais']}} actualmente se encuentra en el Top {{ data['topMuertes']['top'].tolist()[0] }} de muertes antes de {{ data['topMuertesArriba']['pais'].tolist()[0] }} con {{ data['topMuertesArriba']['frecuencia'].tolist()[0] }} muertes y despues de {{ data['topMuertesAbajo']['pais'].tolist()[0] }} con {{ data['topMuertesAbajo']['frecuencia'].tolist()[0] }} muertes, el dia que más muertes ha tenido {{data['pais']}} es {{ data['fechaMaxMuertes']['fecha'].tolist()[0] }} con {{ data['fechaMaxMuertes']['muertes'].tolist()[0] }} muertes.</p>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    </div>
+    </section>
+
+<br>
+
+<!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- AREA CHART -->
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Curva</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool"></button>
+                  <button type="button" class="btn btn-tool"></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="curva" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+            </div>            
+          </div>
+
+          <!--  LINE CHART / BAR CHART  &.col (LEFT) -->
+          <div class="col-md-6">
+
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Diarios</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool"></button>
+                  <button type="button" class="btn btn-tool"></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="diario" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+
+            <!--
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Predicción Casos</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool"></button>
+                  <button type="button" class="btn btn-tool"></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="lineChart" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Predicción Muertes</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool"></button>
+                  <button type="button" class="btn btn-tool"></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="areaChart" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+            </div>
+            -->
+
+          </div> 
+        </div> 
+      </div>
+  </section>
+<!-- /.content -->
+
+<!--
+<section class="content">
+  <div class="container-fluid">
+
+  <br>
+  <p class="text-center">
+    <strong>TOP Paises</strong>
+  </p>
+  {% for i in range(10) %}
+  <div class="overflow-hidden">
+  <div class="progress-group">
+    <strong style="font-size:20px;">{{ data['topPaises']['top'][i] }}</strong>
+      
+    {{ data['topPaises']['pais'][i] }}
+    <span class="float-right">Casos: {{ data['topPaises']['frecuencia'][i] }}</span>
+    <div class="progress" style="height: 40px;">
+      <img src="static/dist/img/banderas/{{ data['topPaises']['pais'][i] }}.png">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ data['topPaises']['porcentaje'][i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ data['topPaises']['porcentaje'][i] }}%"></div>
+    </div>
+  </div>
+  </div>
+  {% endfor %}  
+</div>
+</section>
+-->
+
+
+<div class="card-body">
+  <table id="example1" class="table table-bordered table-striped" >
+    <thead>
+    <tr>
+      <th>Top</th> 
+      <th>País</th>    
+      <th></th> 
+    </tr>
+    </thead>
+    <tbody>
+      {% for i in range(100) %}
+      <tr>
+        <td><strong>{{ data['topPaises']['top'][i] }} </strong></td>
+        <td style="width:40%">       
+        <img src="static/dist/img/banderas/{{ data['topPaises']['pais'][i] }}.png" style="min-height: 40px; height: 40px; max-height: 40px; max-width: 40%;">
+        <a type="submit" style="color:blue;font-size:13px;" href="#inicio" title="ver detalle"  onclick="ajax_param_main('{{ data['topPaises']['pais'][i] }}')"><strong>{{ data['topPaises']['pais'][i] }} </strong></a> 
+        - <strong>Casos</strong> - {{ data['topPaises']['frecuencia'][i] }}
+        </td>
+        <td style="width:60%" >
+          <div class="progress" style="height:30px; width:100%;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ data['topPaises']['porcentaje'][i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ data['topPaises']['porcentaje'][i] }}%">
+          </div> 
+          </div>
+        </td>
+      </tr>
+       {% endfor %}  
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+<!-- ChartJS -->
+<script src="{{ url_for('static', filename='plugins/chart.js/Chart.min.js') }}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ url_for('static', filename='dist/js/demo.js') }}"></script>
+<!-- page script -->
+
+<script>
+  $(document).ready(function() {
+      $('#example1').DataTable({
+      responsive: true,
+      ordering:  true
+      });
+    });
+</script>
+
+
+
+<script>
+
+  new Chart(document.getElementById("curva"), {
+  type: 'line',
+  data: {
+    labels: [{% for i in data['vec_fecha'] %}
+             "{{i}}",
+            {% endfor %}],
+    datasets: [{ 
+        data: [{% for i in data['casosCurva'] %}
+             "{{i}}",
+            {% endfor %}],
+        label: "Casos",
+        borderColor: "#3e95cd",
+        fill: false,
+        pointRadius: 2
+      },
+      { 
+        data: [{% for i in data['muertesCurva'] %}
+             "{{i}}",
+            {% endfor %}],
+        label: "Muertes",
+        borderColor: "#FF4E4E",
+        fill: false,
+        pointRadius: 2
+      }
+
+    ]
+  },
+  options: {
+    title: {
+      display: false,
+      text: '',
+      responsive : true
+    }
+  }
+});
+
+new Chart(document.getElementById("diario"), {
+  type: 'line',
+  data: {
+    labels: [{% for i in data['vec_fecha'] %}
+             "{{i}}",
+            {% endfor %}],
+    datasets: [{ 
+        data: [{% for i in data['casosDiarios'] %}
+             "{{i}}",
+            {% endfor %}],
+        label: "Casos",
+        borderColor: "#3e95cd",
+        fill: false,
+        pointRadius: 2
+      },
+      { 
+        data: [{% for i in data['muertesDiarios'] %}
+             "{{i}}",
+            {% endfor %}],
+        label: "Muertes",
+        borderColor: "#FF4E4E",
+        fill: false,
+        pointRadius: 2
+      }
+
+    ]
+  },
+  options: {
+    title: {
+      display: false,
+      text: '',
+      responsive : true
+    }
+  }
+});  
+
+</script>
